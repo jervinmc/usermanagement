@@ -27,6 +27,23 @@ from django.template.loader import render_to_string, get_template
 from .models import User
 from .serializers import UserSerializer
 
+
+
+class GetUserView(generics.GenericAPIView):
+    queryset=User.objects.all()
+    serializer_class=UserSerializer
+    def get(self,request,format=None):
+        try:
+            user=User.objects.get(id=self.request.user.id)
+            print(self.request.user.id)
+            user_serializer=UserSerializer(user)
+            user_data = user_serializer.data
+            return Response(status=status.HTTP_200_OK,data=user_data)
+        except Exception as e:
+            print(e)
+            return Response(status=status.HTTP_404_NOT_FOUND,data=[])
+
+
 class UserView(viewsets.ModelViewSet):
     permission_classes = (DjangoModelPermissions, )
     queryset=User.objects.all()
