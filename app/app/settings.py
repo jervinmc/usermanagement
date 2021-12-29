@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'users',
     'discussionspace',
     'storages',
+    'events',
     'drf_yasg',
     'rest_framework_simplejwt',
     'corsheaders',

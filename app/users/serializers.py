@@ -4,7 +4,7 @@ from django.contrib.auth.password_validation import validate_password, Validatio
 from django.contrib.auth.models import Group, Permission
 
 class UserSerializer(serializers.ModelSerializer):
-    is_active = serializers.BooleanField(default=True)
+    is_active = serializers.BooleanField(default=False)
     class Meta:
         
         model=User
@@ -23,9 +23,13 @@ class UserSerializer(serializers.ModelSerializer):
         
         email = validated_data.pop('email')
         # password = validated_data.pop('password')
-        password = validated_data.pop('password')    
+        password = validated_data.pop('password')
+        groups = validated_data.pop('groups')
+        
         user = User.objects.create_user(
             email=email, password=password, **validated_data)
+        for g in groups:
+            user.groups.add(g.id)
         return user
 
     def update(self, instance, validated_data):
