@@ -18,3 +18,11 @@ class EventsView(viewsets.ModelViewSet):
             items = Events.objects.filter(is_approved=True)
         serializer = EventsSerializer(items,many=True)
         return Response(data=serializer.data)
+
+
+class GetEventsByUserID(generics.GenericAPIView):
+    def get(self,request,format=None):
+        print(self.request.user.id)
+        items = Events.objects.filter(user_id=self.request.user.id)
+        serializer = EventsSerializer(items,many=True)
+        return Response(data=serializer.data)
