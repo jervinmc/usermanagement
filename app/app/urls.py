@@ -8,6 +8,7 @@ from discussionspace.views import GetDiscussionsByUserID
 from events.views import GetEventsByUserID
 from users.views import GetUserView,Signup
 from rest_framework import permissions
+from marketplace.views import GetMarketplaceByUserID
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -17,6 +18,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('api/v1/admin/', admin.site.urls),
     path('api/v1/discussions/userid/', GetDiscussionsByUserID.as_view(), name='Sign up'),
+    path('api/v1/marketplace/userid/', GetMarketplaceByUserID.as_view(), name='Sign up'),
     path('api/v1/signup/', Signup.as_view(), name='Sign up'),
     path('api/v1/events/userid/', GetEventsByUserID.as_view(), name='Get Events by UserID'),
     path('api/v1/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

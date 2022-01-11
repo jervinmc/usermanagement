@@ -22,4 +22,8 @@ class Marketplace(models.Model):
     descriptions=models.CharField(_('descriptions'),max_length=255,blank=True,null=True)
     image = models.ImageField(
         _('image'), upload_to=nameFile, default="uploads/marketplace_placeholder.png")
+    image_qr = models.ImageField(
+        _('image_qr'), upload_to=nameFile, default="uploads/image_qr.png")
 
+    class Meta:
+        ordering = ["-id"]

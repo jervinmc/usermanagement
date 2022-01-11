@@ -20,3 +20,5 @@ class Discussionspace(models.Model):
     image = models.ImageField(
         _('image'), upload_to=nameFile, default="uploads/Discussionspace_placeholder.png")
 
+    class Meta:
+        ordering = ["-id"]
