@@ -41,5 +41,5 @@ uritemplate==4.1.1
 urllib3==1.26.7
 Pillow==8.4.0
 django-storages==1.12.3
-#Werkzeug==2.0.2
 Werkzeug==2.0.2
+
