@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'marketplace',
     'users',
     'discussionspace',
+    'comments',
     'announcement',
     'storages',
     'events',

@@ -14,5 +14,6 @@ def nameFile(instance, filename):
 class Announcement(models.Model):
     is_active=models.BooleanField(_('is_active'),default=False)
     descriptions=models.CharField(_('descriptions'),max_length=255,blank=True,null=True)
+    title=models.CharField(_('title'),max_length=255,blank=True,null=True)
     image = models.ImageField(
         _('image'), upload_to=nameFile, default="uploads/announcement.png")

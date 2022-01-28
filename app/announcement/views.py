@@ -11,9 +11,9 @@ class AnnouncementView(viewsets.ModelViewSet):
     queryset=Announcement.objects.all()
     serializer_class=AnnouncementSerializer
     def list(self,request):
-        if(self.request.user.is_superuser):
-            items = Announcement.objects.all()
-        else:
-            items = Announcement.objects.filter(is_active=True)
+        # if(self.request.user.is_superuser):
+        items = Announcement.objects.all()
+        # else:
+        #     items = Announcement.objects.filter(is_active=True)
         serializer = AnnouncementSerializer(items,many=True)
         return Response(data=serializer.data)

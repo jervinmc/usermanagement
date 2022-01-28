@@ -17,6 +17,7 @@ class Discussionspace(models.Model):
     user_id=models.CharField(_('user_id'),max_length=255,blank=True,null=True)
     title=models.CharField(_('title'),max_length=255,blank=True,null=True)
     descriptions=models.CharField(_('descriptions'),max_length=255,blank=True,null=True)
+    is_active=models.BooleanField(_('is_active'),default=False)
     image = models.ImageField(
         _('image'), upload_to=nameFile, default="uploads/Discussionspace_placeholder.png")
 
