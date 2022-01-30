@@ -16,8 +16,8 @@ def nameFile(instance, filename):
 class Events(models.Model):
     user_id=models.CharField(_('user_id'),max_length=255,blank=True,null=True)
     event_name=models.CharField(_('event_name'),max_length=255,blank=True,null=True)
-    event_start_date=models.DateField(_('event_start_date'),blank=True,null=True)
-    event_end_date=models.DateField(_('event_end_date'),blank=True,null=True)
+    event_start_date=models.DateTimeField(_('event_start_date'),blank=True,null=True)
+    event_end_date=models.DateTimeField(_('event_end_date'),blank=True,null=True)
     venue=models.CharField(_('venue'),max_length=255,blank=True,null=True)
     event_type=models.CharField(_('event_type'),max_length=255,blank=True,null=True)
     descriptions=models.CharField(_('descriptions'),max_length=255,blank=True,null=True)
@@ -27,3 +27,5 @@ class Events(models.Model):
     image = models.ImageField(
         _('image'), upload_to=nameFile, default="uploads/events_placeholder.png")
 
+    class Meta:
+        ordering = ["-id"]

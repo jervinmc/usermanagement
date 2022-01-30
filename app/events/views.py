@@ -16,15 +16,16 @@ class EventsView(viewsets.ModelViewSet):
     def list(self,request):
         if(self.request.user.is_superuser):
             items = Events.objects.all()
+            items = EventsSerializer(items,many=True)
         else:
             items = Events.objects.filter(is_approved=True)
+            items = EventsSerializer(items,many=True)
         for x in items.data:
-            print(x)
             user = User.objects.filter(id=x['user_id'])
             user = GetUserSerializer(user,many=True)
             x['users']=user.data[0]
-        serializer = EventsSerializer(items,many=True)
-        return Response(data=serializer.data)
+        # serializer = EventsSerializer(items,many=True)
+        return Response(data=items.data)
 
 
 class GetEventsByUserID(generics.GenericAPIView):

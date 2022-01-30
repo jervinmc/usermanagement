@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'announcement',
     'storages',
     'events',
+    'chat',
+    'channel',
     'drf_yasg',
     'rest_framework_simplejwt',
     'corsheaders',
