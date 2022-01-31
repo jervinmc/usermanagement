@@ -30,16 +30,22 @@ class ChannelView(viewsets.ModelViewSet):
                 items = Channel.objects.filter(seller_id=self.request.user.id) | Channel.objects.filter(customer_id=self.request.user.id) 
                 items = ChannelSerializer(items,many=True)
                 for x in items.data:
-                    user = User.objects.filter(id=x['customer_id'])
-                    user = GetUserSerializer(user,many=True)
-                    x['users']=user.data[0]
-            elif self.request.user.account_type=='Customer':
-                items = Channel.objects.filter(customer_id=self.request.user.id)
-                items = ChannelSerializer(items,many=True)
-                for x in items.data:
-                    user = User.objects.filter(id=x['seller_id'])
-                    user = GetUserSerializer(user,many=True)
-                    x['users']=user.data[0]
+                    if(x['seller_id']==self.request.user.id):
+                        user = User.objects.filter(id=x['customer_id'])
+                        user = GetUserSerializer(user,many=True)
+                        x['users']=user.data[0]
+                    else:
+                        user = User.objects.filter(id=x['seller_id'])
+                        user = GetUserSerializer(user,many=True)
+                        x['users']=user.data[0]
+                    
+            # elif self.request.user.account_type=='Customer':
+            #     items = Channel.objects.filter(customer_id=self.request.user.id)
+            #     items = ChannelSerializer(items,many=True)
+            #     for x in items.data:
+            #         user = User.objects.filter(id=x['seller_id'])
+            #         user = GetUserSerializer(user,many=True)
+            #         x['users']=user.data[0]
             return Response(status=status.HTTP_200_OK,data=items.data)
         except Exception as e:
             print(e)

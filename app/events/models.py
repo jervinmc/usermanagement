@@ -26,6 +26,8 @@ class Events(models.Model):
     is_approved=models.BooleanField(_('is_approved'),default=False)
     image = models.ImageField(
         _('image'), upload_to=nameFile, default="uploads/events_placeholder.png")
+    image1 = models.ImageField(
+        _('image1'), upload_to=nameFile, default="uploads/events_placeholder.png")
 
     class Meta:
         ordering = ["-id"]
