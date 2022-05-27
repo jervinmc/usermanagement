@@ -6,7 +6,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from discussionspace.views import GetDiscussionsByUserID
 from events.views import GetEventsByUserID,UpcomingEvents,OfficialEvents,CommunityEvent
-from users.views import GetUserView,Signup
+from users.views import GetUserView,Signup,VerifyUser,ActivateEmail
 from comments.views import CommentsDiscussion
 from rest_framework import permissions
 from chat.views import ChatGet
@@ -34,13 +34,13 @@ urlpatterns = [
     path('api/v1/comments/', include('comments.urls')),
     path('api/v1/channel/', include('channel.urls')),
     path('api/v1/chatgetall/', ChatGet.as_view(), name='get_user'),
+    path('api/v1/approved-email/', ActivateEmail.as_view(), name='get_user'),
     path('api/v1/chat/', include('chat.urls')),
     path('api/v1/announcement/', include('announcement.urls')),
+    path('api/v1/verify/<str:email>/', VerifyUser.as_view(), name='get_user'),
     path('api/v1/users/details/', GetUserView.as_view(), name='get_user'),
     path('api/v1/upcoming/events/', UpcomingEvents.as_view(), name='get_user'),
     path('api/v1/official/events/', OfficialEvents.as_view(), name='get_user'),
     path('api/v1/community/events/', CommunityEvent.as_view(), name='get_user'),
     path('api/v1/comments_discussion/', CommentsDiscussion.as_view(), name='get_user'),
-    
-    
 ]

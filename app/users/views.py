@@ -60,11 +60,37 @@ class Signup(generics.GenericAPIView):
             serializer = UserSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
+            message = get_template('verification.html').render({"email":request.data.get('email')})
+            msg = EmailMultiAlternatives('OTP', message,'naidtngcolo@gmail.com', [request.data.get('email')])
+            html_content = f'<p></p>'
+            msg.content_subtype = "html"
+            msg.send()
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
             return Response(status=status.HTTP_404_NOT_FOUND,data=[])
         
+
+
+class ActivateEmail(generics.GenericAPIView):
+    queryset=User.objects.all()
+    serializer_class=UserSerializer
+    permission_classes=[permissions.AllowAny]
+    def post(self,request,format=None):
+        try:
+            if(request.data.get('status')=='Activate'):
+                message = get_template('approved.html').render({})
+            else:
+                message = get_template('disapproved.html').render({})
+            msg = EmailMultiAlternatives('OTP', message,'naidtngcolo@gmail.com', [request.data.get('email')])
+            html_content = f'<p></p>'
+            msg.content_subtype = "html"
+            msg.send()
+            return Response(status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(status=status.HTTP_404_NOT_FOUND,data=[])
+
 
 class UserView(viewsets.ModelViewSet):
     queryset=User.objects.all()
@@ -104,3 +130,10 @@ class UserView(viewsets.ModelViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
     def get_search_results(self, view, request):
         return Response("none")
+
+
+class VerifyUser(generics.GenericAPIView):
+    permission_classes=[permissions.AllowAny]
+    def get(self,request,format=None,email=None):
+        User.objects.filter(email=email).update(is_verified=True)
+        return Response()

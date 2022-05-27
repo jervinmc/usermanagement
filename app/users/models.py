@@ -39,6 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     password=models.CharField(_('password'),max_length=255,blank=True)
     email=models.CharField(_('email'),max_length=255,blank=True,unique=True)
     is_active=models.BooleanField(_('is_active'),default=True)
+    is_verified=models.BooleanField(_('is_verified'),default=True)
     account_type=models.CharField(_('account_type'),max_length=255,blank=True)
     image = models.ImageField(
         _('image'), upload_to=nameFile, default="uploads/users_placeholder.png")
