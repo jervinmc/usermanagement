@@ -10,7 +10,7 @@ from users.views import GetUserView,Signup,VerifyUser,ActivateEmail
 from comments.views import CommentsDiscussion
 from rest_framework import permissions
 from chat.views import ChatGet
-from marketplace.views import GetMarketplaceByUserID
+from marketplace.views import GetMarketplaceByUserID,BuyPaymaya
 from channel.views import ChannelSend
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -43,4 +43,6 @@ urlpatterns = [
     path('api/v1/official/events/', OfficialEvents.as_view(), name='get_user'),
     path('api/v1/community/events/', CommunityEvent.as_view(), name='get_user'),
     path('api/v1/comments_discussion/', CommentsDiscussion.as_view(), name='get_user'),
+    path('api/v1/buy-paymaya/', BuyPaymaya.as_view(), name='get_user'),
+    
 ]
