@@ -60,11 +60,11 @@ class Signup(generics.GenericAPIView):
             serializer = UserSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
-            message = get_template('verification.html').render({"email":request.data.get('email')})
-            msg = EmailMultiAlternatives('OTP', message,'naidtngcolo@gmail.com', [request.data.get('email')])
-            html_content = f'<p></p>'
-            msg.content_subtype = "html"
-            msg.send()
+            # message = get_template('verification.html').render({"email":request.data.get('email')})
+            # msg = EmailMultiAlternatives('OTP', message,'naidtngcolo@gmail.com', [request.data.get('email')])
+            # html_content = f'<p></p>'
+            # msg.content_subtype = "html"
+            # msg.send()
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
@@ -82,10 +82,10 @@ class ActivateEmail(generics.GenericAPIView):
                 message = get_template('approved.html').render({})
             else:
                 message = get_template('disapproved.html').render({})
-            msg = EmailMultiAlternatives('OTP', message,'naidtngcolo@gmail.com', [request.data.get('email')])
-            html_content = f'<p></p>'
-            msg.content_subtype = "html"
-            msg.send()
+            # msg = EmailMultiAlternatives('OTP', message,'naidtngcolo@gmail.com', [request.data.get('email')])
+            # html_content = f'<p></p>'
+            # msg.content_subtype = "html"
+            # msg.send()
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
