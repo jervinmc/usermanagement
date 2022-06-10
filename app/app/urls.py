@@ -9,6 +9,7 @@ from events.views import GetEventsByUserID,UpcomingEvents,OfficialEvents,Communi
 from users.views import GetUserView,Signup,VerifyUser,ActivateEmail
 from comments.views import CommentsDiscussion
 from rest_framework import permissions
+from going.views import GoingUser
 from chat.views import ChatGet
 from marketplace.views import GetMarketplaceByUserID,BuyPaymaya
 from channel.views import ChannelSend
@@ -33,16 +34,17 @@ urlpatterns = [
     path('api/v1/discussions/', include('discussionspace.urls')),
     path('api/v1/comments/', include('comments.urls')),
     path('api/v1/channel/', include('channel.urls')),
+    path('api/v1/going/', include('going.urls')),
     path('api/v1/chatgetall/', ChatGet.as_view(), name='get_user'),
     path('api/v1/approved-email/', ActivateEmail.as_view(), name='get_user'),
     path('api/v1/chat/', include('chat.urls')),
     path('api/v1/announcement/', include('announcement.urls')),
     path('api/v1/verify/<str:email>/', VerifyUser.as_view(), name='get_user'),
     path('api/v1/users/details/', GetUserView.as_view(), name='get_user'),
+    path('api/v1/going-user/', GoingUser.as_view(), name='get_user'),
     path('api/v1/upcoming/events/', UpcomingEvents.as_view(), name='get_user'),
     path('api/v1/official/events/', OfficialEvents.as_view(), name='get_user'),
     path('api/v1/community/events/', CommunityEvent.as_view(), name='get_user'),
     path('api/v1/comments_discussion/', CommentsDiscussion.as_view(), name='get_user'),
-    path('api/v1/buy-paymaya/', BuyPaymaya.as_view(), name='get_user'),
-    
+    path('api/v1/buy-paymaya/', BuyPaymaya.as_view(), name='get_user'),   
 ]

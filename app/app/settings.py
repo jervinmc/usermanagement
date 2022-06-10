@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_simplejwt',
     'corsheaders',
+    'going',
 ]
 REST_FRAMEWORK = {   
     'DEFAULT_AUTHENTICATION_CLASSES': (
